@@ -6,12 +6,16 @@ void DrawSnake(Vector2 Position,char SnakeArr[], int snakeLength) {
 
 }
 
-
+Texture2D Snake;
 
 int main (void) {
 
+    enum Rotation {DOWN = 0, LEFT = 90 , UP = 180 , RIGHT = 270};
+    int snakeRotation = DOWN;
+
     InitWindow(800,450,"Game Window");
     SetTargetFPS(144);
+    Snake = LoadTexture("resources/Snake.png");
 
     int Case = 1 ;
 
@@ -40,8 +44,9 @@ int main (void) {
 
             Position.x = (int)(Position.x / 25 ) * 25;
             Position.y = (int)(Position.y / 25 ) * 25;
-            DrawRectangleV(Position,Size,BLUE);
+          //  DrawRectangleV(Position,Size,BLUE);
 
+            DrawTexturePro(Snake,(Rectangle){25,0,25,25},(Rectangle){Position.x,Position.y,25,25},(Vector2){0,0},snakeRotation,WHITE );
             timer++;
             if (timer > SNAKESPEED) {
                 switch (direction) {
